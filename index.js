@@ -46,7 +46,9 @@ app.get('/auth/linkedin/callback', async (req, res) => {
     res.status(500).send('Error fetching access token');
   }
 });
-
+app.get("/",async(req,res)=>{
+  res.json({message:"success"}).status(200);
+})
 
 app.get('/auth/linkedin/profile', async (req, res) => {
     
