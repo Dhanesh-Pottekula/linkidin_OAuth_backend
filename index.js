@@ -39,7 +39,7 @@ app.get('/auth/linkedin/callback', async (req, res) => {
     });
 
      access_token  = response.data.access_token;
-     console.log(access_token);
+     console.log(response.data);
     res.json({ access_token });
 
   } catch (error) {
@@ -68,7 +68,7 @@ app.get('/auth/linkedin/profile', async (req, res) => {
       res.json(response.data);
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error fetching LinkedIn profile');
+      res.status(500).send(error);
     }
   });
   
