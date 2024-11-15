@@ -30,7 +30,8 @@ app.get('/auth/linkedin/callback', async (req, res) => {
         grant_type: 'authorization_code',
         code,
         client_id: process.env.LINKEDIN_CLIENT_ID,
-        client_secret: process.env.LINKEDIN_CLIENT_SECRET
+        client_secret: process.env.LINKEDIN_CLIENT_SECRET,
+        redirect_uri:process.env.LINKIDIN_REDIRECT_URI
       },
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
