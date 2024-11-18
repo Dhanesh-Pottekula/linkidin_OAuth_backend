@@ -41,7 +41,10 @@ app.get("/auth/linkedin/callback", async (req, res) => {
 
     access_token = response.data.access_token;
     console.log(response.data);
+    const decodedToken = jwtDecode(idToken);
+    const userId = decodedToken.sub;
 
+    console.log("jwt token",decodedToken);
     // call the profile api
     if (!access_token) {
       return res.status(400).send("Error: Access token is required");
@@ -54,7 +57,6 @@ app.get("/auth/linkedin/callback", async (req, res) => {
         },
       });
 
-      const userId = response?.data?.id;
       console.log(response.data);
       //get the educatinoal details
       axios
@@ -93,7 +95,12 @@ app.get("/", async (req, res) => {
   res.json({ message: "success" }).status(200);
 });
 
-app.get("/auth/linkedin/profile", async (req, res) => {});
+app.get("/auth/linkedin/profile", async (req, res) => {
+  const decodedToken = jwtDecode("eyJ6aXAiOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ5Mjk2NjhhLWJhYjEtNGM2OS05NTk4LTQzNzMxNDk3MjNmZiIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJodHRwczovL3d3dy5saW5rZWRpbi5jb20vb2F1dGgiLCJhdWQiOiI3OHpyejVrZG1leHB6MSIsImlhdCI6MTczMTkzNjA2MiwiZXhwIjoxNzMxOTM5NjYyLCJzdWIiOiJDcmFjU1k0aGtvIiwibmFtZSI6IkRoYW5lc2ggUG90dGVrdWxhIiwiZ2l2ZW5fbmFtZSI6IkRoYW5lc2giLCJmYW1pbHlfbmFtZSI6IlBvdHRla3VsYSIsInBpY3R1cmUiOiJodHRwczovL21lZGlhLmxpY2RuLmNvbS9kbXMvaW1hZ2UvdjIvRDU2MDNBUUdiWFROUGl3WE54dy9wcm9maWxlLWRpc3BsYXlwaG90by1zaHJpbmtfMTAwXzEwMC9wcm9maWxlLWRpc3BsYXlwaG90by1zaHJpbmtfMTAwXzEwMC8wLzE3MjExNTE2Mjc1MzM_ZT0yMTQ3NDgzNjQ3JnY9YmV0YSZ0PWpod1ljUGpCVmVFY1ZEejdabUNhX2piV0JyblJGc1p3dE1fNTRyR1VyZkkiLCJlbWFpbCI6IkRoYW5lc2hwazM1OUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6InRydWUiLCJsb2NhbGUiOiJlbl9VUyJ9.FG5x57FHQFUcaOo9RyT2fmSrXx42F4IxVuLXk5cKstX8GfIeiGvzeNnyPzoLcNaRElJzQRQ0NaR5tR5fCad7CthxymPKjcDE4afw1agBpmDo2rRNmw0xssIlB1wxZ_5V1yqgG3bMbAYygKyruzY5V7o_xkI--J6VXQe8QnNgylX-QkNwhVegS_sFR1uh5bjrdFp_aq78iZfLAKSdcab5klqUFVAGjJ3Dun2WpuH2tYRPWTNVfrOoRPQIiTfXMxc4T86POjI4iXeJsPvU9Cq7HuwvkzBFaqKqhBvUZd8ZYqsUoQPNkDz2qZB8OqnIwno9Dny4bfULJQaRIM_kj-2zYnOEy_9YGn_fCS992OcZNHSsifrTtslStkzOH44pfpd_AfY2tHQHpDaPeOFpHXZOzB4ZmIVEMS7lxBSvO99gckEazhHmUtfgGvd7GFqdduQ2gQt1ZT2qAFFgCdb1JPZ5Wzfd9OBzU2SK1ugA0MapPvQo1CxqWiAxvrAT-mk3srz5yyhdCMd3oxSo4uhDn61X9oegpXbrwHvWwjyj5ymkjVn2PVSDfm_hmVAr5k7qS5hsvTQ-bEaXSFolfa3wIwY5YiOUmNjj1VbQQBOW_i1bnUZx75EumYSqANJtxPHq5qTxoHMpN-bbBjfgTpN4SIS1VejxKgNtBH4ByrZgCEBU7eU");
+    const userId = decodedToken.sub;
+
+    console.log("jwt token",decodedToken);
+});
 
 // Start the server
 app.listen(port, () => {
