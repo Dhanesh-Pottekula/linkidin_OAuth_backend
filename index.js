@@ -41,6 +41,7 @@ app.get("/auth/linkedin/callback", async (req, res) => {
 
     access_token = response.data.access_token;
     console.log(response.data);
+    const idToken=res?.data?.id_token;
     const decodedToken = jwtDecode(idToken);
     const userId = decodedToken.sub;
 
