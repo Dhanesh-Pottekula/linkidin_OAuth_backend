@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const app = express();
 const port = 4000;
-let access_token;
+let access_token="AQUXNq-DsiHdxPuHtnlkdDvXlOLuc0bYt8bLcJCitqAGVXjOeW9YFoWm1uN6IXC1i7-m6sqCdMjTn5lBAa3u2fiIuSoW9eUhGYqV3cr57LWsmssA9DBKHaf9f8fXkL-5Awlllkxcrb4D_ocuGxX-7T6ClOT4wVVLbo1PTNemvq2N-zXh3xPdSc_-sCQwogUCYjWzsiEcCO2n0J_IkdIOoqJMe_KGvYolffyhOZjelh8smZ0nSqEr52qSp6E6o8Q7SFP5UY0i8IAAJE8El7czsZPnvfUd70xWmBW4z1j8rzzmUowcRrvuqtvwTuDbHIuoHSc-ZHAiHUJFYGm8QgvcF3eA4eOHNA"
 // LinkedIn OAuth URLs
 const LINKEDIN_AUTH_URL = 'https://www.linkedin.com/oauth/v2/authorization';
 const LINKEDIN_TOKEN_URL = 'https://www.linkedin.com/oauth/v2/accessToken';
@@ -40,20 +40,9 @@ app.get('/auth/linkedin/callback', async (req, res) => {
 
      access_token  = response.data.access_token;
      console.log(response.data);
-    res.json({ access_token });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error fetching access token');
-  }
-});
-app.get("/",async(req,res)=>{
-  res.json({message:"success"}).status(200);
-})
-
-app.get('/auth/linkedin/profile', async (req, res) => {
-    
-    if (!access_token) {
+     
+     // call the profile api 
+     if (!access_token) {
       return res.status(400).send('Error: Access token is required');
     }
   
@@ -70,6 +59,20 @@ app.get('/auth/linkedin/profile', async (req, res) => {
       console.error(error);
       res.status(500).send(error);
     }
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching access token');
+  }
+});
+
+app.get("/",async(req,res)=>{
+  res.json({message:"success"}).status(200);
+})
+
+app.get('/auth/linkedin/profile', async (req, res) => {
+    
+   
   });
   
 // Start the server
