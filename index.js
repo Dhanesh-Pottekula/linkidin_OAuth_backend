@@ -40,14 +40,14 @@ app.get('/auth/linkedin/callback', async (req, res) => {
 
      access_token  = response.data.access_token;
      console.log(response.data);
-     
+
      // call the profile api 
      if (!access_token) {
       return res.status(400).send('Error: Access token is required');
     }
   
     try {
-      const response = await axios.get('https://api.linkedin.com/v2/me', {
+      const response = await axios.get('https://api.linkedin.com/v2/userinfo', {
         headers: {
           Authorization: `Bearer ${access_token}`
         }
@@ -56,7 +56,7 @@ app.get('/auth/linkedin/callback', async (req, res) => {
       // Send back the profile data as a response
       res.json(response.data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       res.status(500).send(error);
     }
 
