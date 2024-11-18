@@ -47,7 +47,7 @@ app.get('/auth/linkedin/callback', async (req, res) => {
     }
   
     try {
-      const response = await axios.get('https://api.linkedin.com/v2/skills', {
+      const response = await axios.get('https://api.linkedin.com/v2/me', {
         headers: {
           Authorization: `Bearer ${access_token}`
         }
